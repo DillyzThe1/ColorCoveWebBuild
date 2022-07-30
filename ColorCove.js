@@ -803,7 +803,7 @@ ApplicationMain.main = function() {
 ApplicationMain.create = function(config) {
 	var app = new openfl_display_Application();
 	ManifestResources.init(config);
-	app.meta.h["build"] = "29";
+	app.meta.h["build"] = "37";
 	app.meta.h["company"] = "DillyzThe1";
 	app.meta.h["file"] = "ColorCove";
 	app.meta.h["name"] = "ColorCove by DillyzThe1";
@@ -3135,7 +3135,7 @@ IncompatibiltyWarningState.prototype = $extend(flixel_FlxState.prototype,{
 		this.warningText.setFormat("assets/" + ("fonts/" + "FredokaOne-Regular" + "." + "ttf"),16 * textScale | 0,-1,"center",flixel_text_FlxTextBorderStyle.OUTLINE,-16777216,true);
 		this.warningText.set_antialiasing(ClientSettings.getBoolByString("antialiasing",true));
 		this.add(this.warningText);
-		this.warningText.set_text("Warning!\nThis game is meant for a windows desktop!\n\n" + (flixel_FlxG.html5.onMobile ? "Mobile web builds have a few known bugs,\nbut please report them on github!" : "Web builds may have unknown bugs as of now,\nso please report them on github!") + "\n\nhttps://www.github.com/DillyzThe1/ColorCove/\n");
+		this.warningText.set_text("Warning!\nThis game is meant for a desktop platform!\n\n" + (flixel_FlxG.html5.onMobile ? "Mobile web builds have a few known bugs,\nbut please report them on github!" : "Web builds may have unknown bugs as of now,\nso please report them on github!") + "\n\nhttps://www.github.com/DillyzThe1/ColorCove/\n");
 		var _this = this.warningText;
 		var axes = flixel_util_FlxAxes.XY;
 		var tmp;
@@ -5324,7 +5324,6 @@ ClientSettings.retrieveIntSaves = function() {
 		var keys = ClientSettings.globalSave.data.intMapSaves_keys;
 		var values = ClientSettings.globalSave.data.intMapSaves_values;
 		if(keys.length != values.length) {
-			console.log("source/ClientSettings.hx:58:","Integer data mismatch! Aborting retrievement of int values...");
 			return false;
 		}
 		var _g = 0;
@@ -5333,10 +5332,8 @@ ClientSettings.retrieveIntSaves = function() {
 			var i = _g++;
 			ClientSettings.intMap.h[keys[i]] = values[i];
 		}
-		console.log("source/ClientSettings.hx:65:","Integer data loaded! Data: " + (ClientSettings.intMap == null ? "null" : haxe_ds_StringMap.stringify(ClientSettings.intMap.h)));
 		return true;
 	}
-	console.log("source/ClientSettings.hx:70:","Integer data MISSING! Aborting retrievement of int values...");
 	return false;
 };
 ClientSettings.retrieveFloatSaves = function() {
@@ -5345,7 +5342,6 @@ ClientSettings.retrieveFloatSaves = function() {
 		var keys = ClientSettings.globalSave.data.floatMapSaves_keys;
 		var values = ClientSettings.globalSave.data.floatMapSaves_values;
 		if(keys.length != values.length) {
-			console.log("source/ClientSettings.hx:85:","Float data mismatch! Aborting retrievement of float values....");
 			return false;
 		}
 		var _g = 0;
@@ -5354,10 +5350,8 @@ ClientSettings.retrieveFloatSaves = function() {
 			var i = _g++;
 			ClientSettings.floatMap.h[keys[i]] = values[i];
 		}
-		console.log("source/ClientSettings.hx:92:","Float data loaded! Data: " + (ClientSettings.floatMap == null ? "null" : haxe_ds_StringMap.stringify(ClientSettings.floatMap.h)));
 		return true;
 	}
-	console.log("source/ClientSettings.hx:97:","Float data MISSING! Aborting retrievement of float values...");
 	return false;
 };
 ClientSettings.retrieveBooleanSaves = function() {
@@ -5366,7 +5360,6 @@ ClientSettings.retrieveBooleanSaves = function() {
 		var keys = ClientSettings.globalSave.data.booleanMapSaves_keys;
 		var values = ClientSettings.globalSave.data.booleanMapSaves_values;
 		if(keys.length != values.length) {
-			console.log("source/ClientSettings.hx:112:","Boolean data mismatch! Aborting retrievement of boolean values....");
 			return false;
 		}
 		var _g = 0;
@@ -5375,10 +5368,8 @@ ClientSettings.retrieveBooleanSaves = function() {
 			var i = _g++;
 			ClientSettings.boolMap.h[keys[i]] = values[i];
 		}
-		console.log("source/ClientSettings.hx:119:","Boolean data loaded! Data: " + (ClientSettings.boolMap == null ? "null" : haxe_ds_StringMap.stringify(ClientSettings.boolMap.h)));
 		return true;
 	}
-	console.log("source/ClientSettings.hx:124:","Boolean data MISSING! Aborting retrievement of boolean values...");
 	return false;
 };
 ClientSettings.setData = function() {
@@ -5451,7 +5442,6 @@ ClientSettings.checkForNullMaps = function() {
 };
 ClientSettings.updateBoolByString = function(str,value) {
 	ClientSettings.checkForNullMaps();
-	console.log("source/ClientSettings.hx:206:","" + str + " = " + (value == null ? "null" : "" + value));
 	ClientSettings.boolMap.h[str] = value;
 	if(str == "autopause") {
 		flixel_FlxG.autoPause = value;
@@ -5459,7 +5449,6 @@ ClientSettings.updateBoolByString = function(str,value) {
 };
 ClientSettings.updateIntByString = function(str,value) {
 	ClientSettings.checkForNullMaps();
-	console.log("source/ClientSettings.hx:217:","" + str + " = " + value);
 	ClientSettings.intMap.h[str] = value;
 	if(str == "musicvolume") {
 		flixel_FlxG.sound.music.set_volume(value / 100);
@@ -5467,7 +5456,6 @@ ClientSettings.updateIntByString = function(str,value) {
 };
 ClientSettings.updateFloatByString = function(str,value) {
 	ClientSettings.checkForNullMaps();
-	console.log("source/ClientSettings.hx:228:","" + str + " = " + value);
 	ClientSettings.floatMap.h[str] = value;
 };
 ClientSettings.getBoolByString = function(str,def) {
@@ -5671,7 +5659,7 @@ ManifestResources.init = function(config) {
 	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$nokiafc22_$ttf);
 	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$monsterrat_$ttf);
 	var bundle;
-	var data = "{\"name\":null,\"assets\":\"aoy4:pathy34:assets%2Fdata%2Fdata-goes-here.txty4:sizezy4:typey4:TEXTy2:idR1y7:preloadtgoR2i42452R3y4:FONTy9:classNamey44:__ASSET__assets_fonts_fredokaone_regular_ttfR5y39:assets%2Ffonts%2FFredokaOne-Regular.ttfR6tgoR2i14828R3R7R8y48:__ASSET__assets_fonts_librebarcode39_regular_ttfR5y43:assets%2Ffonts%2FLibreBarcode39-Regular.ttfR6tgoR0y24:assets%2Ffonts%2FOFL.txtR2i4495R3R4R5R13R6tgoR0y31:assets%2Fimages%2FBuildings.pngR2i768784R3y5:IMAGER5R14R6tgoR0y31:assets%2Fimages%2FBuildings.xmlR2i1003R3R4R5R16R6tgoR0y32:assets%2Fimages%2FCharacters.pngR2i364078R3R15R5R17R6tgoR0y32:assets%2Fimages%2FCharacters.xmlR2i6396R3R4R5R18R6tgoR0y35:assets%2Fimages%2Fexit%20button.pngR2i39477R3R15R5R19R6tgoR0y35:assets%2Fimages%2Fexit%20button.xmlR2i2203R3R4R5R20R6tgoR0y26:assets%2Fimages%2Ffred.pngR2i19120R3R15R5R21R6tgoR0y32:assets%2Fimages%2Ffun%20fact.txtR2i159R3R4R5R22R6tgoR0y26:assets%2Fimages%2FHill.pngR2i156493R3R15R5R23R6tgoR0y36:assets%2Fimages%2Fimages-go-here.txtR2zR3R4R5R24R6tgoR0y55:assets%2Fimages%2FInfo%20Popup%20Atlas%2FAnimation.jsonR2i25711R3R4R5R25R6tgoR0y56:assets%2Fimages%2FInfo%20Popup%20Atlas%2Fspritemap1.jsonR2i2215R3R4R5R26R6tgoR0y55:assets%2Fimages%2FInfo%20Popup%20Atlas%2Fspritemap1.pngR2i247468R3R15R5R27R6tgoR0y51:assets%2Fimages%2FInfo%20Popup%20Atlas%2Fstatic.pngR2i294521R3R15R5R28R6tgoR0y38:assets%2Fimages%2FOptions%20Arrows.pngR2i115840R3R15R5R29R6tgoR0y38:assets%2Fimages%2FOptions%20Arrows.xmlR2i7576R3R4R5R30R6tgoR0y34:assets%2Fimages%2FOptions%20BG.pngR2i471541R3R15R5R31R6tgoR0y34:assets%2Fimages%2FOptions%20BG.xmlR2i1913R3R4R5R32R6tgoR0y39:assets%2Fimages%2FOptions%20Buttons.pngR2i169246R3R15R5R33R6tgoR0y39:assets%2Fimages%2FOptions%20Buttons.xmlR2i13467R3R4R5R34R6tgoR0y37:assets%2Fimages%2FOptions%20Icons.pngR2i27800R3R15R5R35R6tgoR0y37:assets%2Fimages%2FOptions%20Icons.xmlR2i1035R3R4R5R36R6tgoR0y30:assets%2Fimages%2FSidewalk.pngR2i601863R3R15R5R37R6tgoR0y36:assets%2Fimages%2FSign%20Buttons.pngR2i610546R3R15R5R38R6tgoR0y36:assets%2Fimages%2FSign%20Buttons.xmlR2i2928R3R4R5R39R6tgoR0y33:assets%2Fimages%2FSign%20Post.pngR2i24048R3R15R5R40R6tgoR0y25:assets%2Fimages%2FSky.pngR2i213542R3R15R5R41R6tgoR0y35:assets%2Fimages%2FStreet%20Over.pngR2i53130R3R15R5R42R6tgoR2i2626873R3y5:MUSICR5y39:assets%2Fmusic%2Fcove-of-the-colors.mp3y9:pathGroupaR44hR6tgoR0y27:assets%2Fmusic%2Fmashup.txtR2i184R3R4R5R46R6tgoR0y36:assets%2Fmusic%2Fmusic-goes-here.txtR2zR3R4R5R47R6tgoR2i1691898R3R43R5y35:assets%2Fmusic%2Fside-walkin%27.mp3R45aR48hR6tgoR2i2216437R3R43R5y29:assets%2Fmusic%2Ftimestop.mp3R45aR49hR6tgoR2i46393R3R43R5y27:assets%2Fsounds%2Fallow.mp3R45aR50hR6tgoR2i47647R3R43R5y31:assets%2Fsounds%2Fallow_alt.mp3R45aR51hR6tgoR2i50991R3R43R5y33:assets%2Fsounds%2Fclick%20lol.mp3R45aR52hR6tgoR2i43467R3R43R5y26:assets%2Fsounds%2Fdeny.mp3R45aR53hR6tgoR2i72724R3R43R5y26:assets%2Fsounds%2Fkill.mp3R45aR54hR6tgoR2i35526R3R43R5y30:assets%2Fsounds%2Fle%20tap.mp3R45aR55hR6tgoR2i114102R3R43R5y41:assets%2Fsounds%2Fold%2Fallow_alt_old.mp3R45aR56hR6tgoR2i43467R3R43R5y37:assets%2Fsounds%2Fold%2Fpause_old.mp3R45aR57hR6tgoR0y42:assets%2Fsounds%2Fold%2Fsounds-go-here.txtR2zR3R4R5R58R6tgoR2i71471R3R43R5y36:assets%2Fsounds%2FOW%20MY%20EARS.mp3R45aR59hR6tgoR2i69799R3R43R5y27:assets%2Fsounds%2Fpause.mp3R45aR60hR6tgoR0y34:assetsHidden%2Fdata%2FbuildNum.txtR2i5R3R4R5R61R6tgoR2i2114R3R43R5y26:flixel%2Fsounds%2Fbeep.mp3R45aR62y26:flixel%2Fsounds%2Fbeep.ogghR6tgoR2i39706R3R43R5y28:flixel%2Fsounds%2Fflixel.mp3R45aR64y28:flixel%2Fsounds%2Fflixel.ogghR6tgoR2i5794R3y5:SOUNDR5R63R45aR62R63hgoR2i33629R3R66R5R65R45aR64R65hgoR2i15744R3R7R8y35:__ASSET__flixel_fonts_nokiafc22_ttfR5y30:flixel%2Ffonts%2Fnokiafc22.ttfR6tgoR2i29724R3R7R8y36:__ASSET__flixel_fonts_monsterrat_ttfR5y31:flixel%2Ffonts%2Fmonsterrat.ttfR6tgoR0y33:flixel%2Fimages%2Fui%2Fbutton.pngR2i519R3R15R5R71R6tgoR0y36:flixel%2Fimages%2Flogo%2Fdefault.pngR2i3280R3R15R5R72R6tgoR0y20:DON%27T%20README.txtR2i1317R3R4R5R73R6tgh\",\"rootPath\":null,\"version\":2,\"libraryArgs\":[],\"libraryType\":null}";
+	var data = "{\"name\":null,\"assets\":\"aoy4:pathy34:assets%2Fdata%2Fdata-goes-here.txty4:sizezy4:typey4:TEXTy2:idR1y7:preloadtgoR2i42452R3y4:FONTy9:classNamey44:__ASSET__assets_fonts_fredokaone_regular_ttfR5y39:assets%2Ffonts%2FFredokaOne-Regular.ttfR6tgoR2i14828R3R7R8y48:__ASSET__assets_fonts_librebarcode39_regular_ttfR5y43:assets%2Ffonts%2FLibreBarcode39-Regular.ttfR6tgoR0y24:assets%2Ffonts%2FOFL.txtR2i4495R3R4R5R13R6tgoR0y31:assets%2Fimages%2FBuildings.pngR2i768784R3y5:IMAGER5R14R6tgoR0y31:assets%2Fimages%2FBuildings.xmlR2i1003R3R4R5R16R6tgoR0y32:assets%2Fimages%2FCharacters.pngR2i364078R3R15R5R17R6tgoR0y32:assets%2Fimages%2FCharacters.xmlR2i6396R3R4R5R18R6tgoR0y35:assets%2Fimages%2Fexit%20button.pngR2i39477R3R15R5R19R6tgoR0y35:assets%2Fimages%2Fexit%20button.xmlR2i2203R3R4R5R20R6tgoR0y26:assets%2Fimages%2Ffred.pngR2i19120R3R15R5R21R6tgoR0y32:assets%2Fimages%2Ffun%20fact.txtR2i159R3R4R5R22R6tgoR0y26:assets%2Fimages%2FHill.pngR2i156493R3R15R5R23R6tgoR0y36:assets%2Fimages%2Fimages-go-here.txtR2zR3R4R5R24R6tgoR0y55:assets%2Fimages%2FInfo%20Popup%20Atlas%2FAnimation.jsonR2i25711R3R4R5R25R6tgoR0y56:assets%2Fimages%2FInfo%20Popup%20Atlas%2Fspritemap1.jsonR2i2215R3R4R5R26R6tgoR0y55:assets%2Fimages%2FInfo%20Popup%20Atlas%2Fspritemap1.pngR2i247468R3R15R5R27R6tgoR0y51:assets%2Fimages%2FInfo%20Popup%20Atlas%2Fstatic.pngR2i294521R3R15R5R28R6tgoR0y38:assets%2Fimages%2FOptions%20Arrows.pngR2i115840R3R15R5R29R6tgoR0y38:assets%2Fimages%2FOptions%20Arrows.xmlR2i7576R3R4R5R30R6tgoR0y34:assets%2Fimages%2FOptions%20BG.pngR2i471541R3R15R5R31R6tgoR0y34:assets%2Fimages%2FOptions%20BG.xmlR2i1913R3R4R5R32R6tgoR0y39:assets%2Fimages%2FOptions%20Buttons.pngR2i169246R3R15R5R33R6tgoR0y39:assets%2Fimages%2FOptions%20Buttons.xmlR2i13467R3R4R5R34R6tgoR0y37:assets%2Fimages%2FOptions%20Icons.pngR2i27800R3R15R5R35R6tgoR0y37:assets%2Fimages%2FOptions%20Icons.xmlR2i1035R3R4R5R36R6tgoR0y30:assets%2Fimages%2FSidewalk.pngR2i601863R3R15R5R37R6tgoR0y36:assets%2Fimages%2FSign%20Buttons.pngR2i610546R3R15R5R38R6tgoR0y36:assets%2Fimages%2FSign%20Buttons.xmlR2i2928R3R4R5R39R6tgoR0y33:assets%2Fimages%2FSign%20Post.pngR2i24048R3R15R5R40R6tgoR0y25:assets%2Fimages%2FSky.pngR2i213542R3R15R5R41R6tgoR0y35:assets%2Fimages%2FStreet%20Over.pngR2i53130R3R15R5R42R6tgoR2i2626873R3y5:MUSICR5y39:assets%2Fmusic%2Fcove-of-the-colors.mp3y9:pathGroupaR44hR6tgoR0y27:assets%2Fmusic%2Fmashup.txtR2i184R3R4R5R46R6tgoR0y36:assets%2Fmusic%2Fmusic-goes-here.txtR2zR3R4R5R47R6tgoR2i1691898R3R43R5y35:assets%2Fmusic%2Fside-walkin%27.mp3R45aR48hR6tgoR2i2216437R3R43R5y29:assets%2Fmusic%2Ftimestop.mp3R45aR49hR6tgoR2i46393R3R43R5y27:assets%2Fsounds%2Fallow.mp3R45aR50hR6tgoR2i47647R3R43R5y31:assets%2Fsounds%2Fallow_alt.mp3R45aR51hR6tgoR2i50991R3R43R5y33:assets%2Fsounds%2Fclick%20lol.mp3R45aR52hR6tgoR2i43467R3R43R5y26:assets%2Fsounds%2Fdeny.mp3R45aR53hR6tgoR2i72724R3R43R5y26:assets%2Fsounds%2Fkill.mp3R45aR54hR6tgoR2i35526R3R43R5y30:assets%2Fsounds%2Fle%20tap.mp3R45aR55hR6tgoR2i114102R3R43R5y41:assets%2Fsounds%2Fold%2Fallow_alt_old.mp3R45aR56hR6tgoR2i43467R3R43R5y37:assets%2Fsounds%2Fold%2Fpause_old.mp3R45aR57hR6tgoR0y42:assets%2Fsounds%2Fold%2Fsounds-go-here.txtR2zR3R4R5R58R6tgoR2i71471R3R43R5y36:assets%2Fsounds%2FOW%20MY%20EARS.mp3R45aR59hR6tgoR2i69799R3R43R5y27:assets%2Fsounds%2Fpause.mp3R45aR60hR6tgoR0y34:assetsHidden%2Fdata%2FbuildNum.txtR2i3R3R4R5R61R6tgoR2i2114R3R43R5y26:flixel%2Fsounds%2Fbeep.mp3R45aR62y26:flixel%2Fsounds%2Fbeep.ogghR6tgoR2i39706R3R43R5y28:flixel%2Fsounds%2Fflixel.mp3R45aR64y28:flixel%2Fsounds%2Fflixel.ogghR6tgoR2i5794R3y5:SOUNDR5R63R45aR62R63hgoR2i33629R3R66R5R65R45aR64R65hgoR2i15744R3R7R8y35:__ASSET__flixel_fonts_nokiafc22_ttfR5y30:flixel%2Ffonts%2Fnokiafc22.ttfR6tgoR2i29724R3R7R8y36:__ASSET__flixel_fonts_monsterrat_ttfR5y31:flixel%2Ffonts%2Fmonsterrat.ttfR6tgoR0y33:flixel%2Fimages%2Fui%2Fbutton.pngR2i519R3R15R5R71R6tgoR0y36:flixel%2Fimages%2Flogo%2Fdefault.pngR2i3280R3R15R5R72R6tgoR0y20:DON%27T%20README.txtR2i1317R3R4R5R73R6tgh\",\"rootPath\":null,\"version\":2,\"libraryArgs\":[],\"libraryType\":null}";
 	var manifest = lime_utils_AssetManifest.parse(data,ManifestResources.rootPath);
 	var library = lime_utils_AssetLibrary.fromManifest(manifest);
 	lime_utils_Assets.registerLibrary("default",library);
@@ -6020,6 +6008,7 @@ MenuState.prototype = $extend(flixel_FlxState.prototype,{
 		flixel_FlxG.cameras.reset(this.camGame);
 		this.camGame.bgColor = flixel_util_FlxColor.fromString("#99CCFF");
 		BlurryFlxSubState.blurThingEnabled = ClientSettings.getBoolByString("pausemenublur",true);
+		flixel_FlxG.autoPause = ClientSettings.getBoolByString("autopause",true);
 		this.followPoint = new flixel_math_FlxPoint(flixel_FlxG.width / 2,flixel_FlxG.height / 2);
 		this.camFollow = new flixel_FlxObject();
 		this.camGame.follow(this.camFollow,flixel_FlxCameraFollowStyle.LOCKON,0.03 / (flixel_FlxG.updateFramerate / 120));
@@ -6213,14 +6202,12 @@ MenuState.prototype = $extend(flixel_FlxState.prototype,{
 			this.musicBox.playSound("OW MY EARS",1.25);
 			this.menuTitle.playAnim("fred 3am",true);
 		}
-		flixel_FlxG.autoPause = ClientSettings.getBoolByString("autopause",true);
 		if(!MenuState.checkedVersion) {
 			MenuState.checkedVersion = true;
 			var dataRequest = new haxe_http_HttpJs(OutdatedSubState.versionLink);
 			var dataReturned;
 			dataRequest.onData = function(data) {
 				OutdatedSubState.updateBuild();
-				console.log("source/MenuState.hx:110:","Data returned to socket! Data: " + data);
 				dataReturned = data.split(";");
 				OutdatedSubState.publicBuildNum = Std.parseInt(dataReturned[0]);
 				OutdatedSubState.publicBuildVers = dataReturned[1];
@@ -6238,7 +6225,6 @@ MenuState.prototype = $extend(flixel_FlxState.prototype,{
 				_gthis.camGame.flash();
 			};
 			dataRequest.onError = function(data) {
-				console.log("source/MenuState.hx:133:","No data returned to socket.");
 				_gthis.musicBox.playSound("deny");
 			};
 			dataRequest.request();
@@ -6482,7 +6468,6 @@ OptionsPopup.prototype = $extend(flixel_group_FlxTypedSpriteGroup.prototype,{
 				option.set_y((flixel_FlxG.height - option.get_height()) / 2);
 			}
 			option.set_x(option.x - 95);
-			console.log("source/OptionsPopup.hx:240:",obj.optionName + " created");
 			this.optionArray.add(option);
 		}
 	}
@@ -6800,11 +6785,9 @@ OptionsSubState.prototype = $extend(BlurryFlxSubState.prototype,{
 				_gthis.newPopup.destroy();
 				MenuState.instance.restoreButtons();
 				MenuState.instance.closeSubState();
-				console.log("source/OptionsSubState.hx:50:","boowomp 2");
 			};
 			flixel_tweens_FlxTween.tween(_gthis.bruhCam,{ alpha : 0},0.65,{ ease : flixel_tweens_FlxEase.cubeOut});
 			_gthis.tweenOutBlur();
-			console.log("source/OptionsSubState.hx:54:","boowomp");
 		};
 	}
 	,update: function(e) {
@@ -6825,7 +6808,6 @@ $hxClasses["OutdatedSubState"] = OutdatedSubState;
 OutdatedSubState.__name__ = "OutdatedSubState";
 OutdatedSubState.updateBuild = function() {
 	OutdatedSubState.curBuildNum = Std.parseInt(lime_utils_Assets.getText("assetsHidden/" + ("data/" + "buildNum" + ".txt")));
-	console.log("source/OutdatedSubState.hx:40:",OutdatedSubState.curBuildNum);
 };
 OutdatedSubState.__super__ = BlurryFlxSubState;
 OutdatedSubState.prototype = $extend(BlurryFlxSubState.prototype,{
@@ -7044,7 +7026,6 @@ PauseSubState.prototype = $extend(BlurryFlxSubState.prototype,{
 				_this.set_y((flixel_FlxG.height - _this.get_height()) / 2);
 			}
 		}
-		console.log("source/PauseSubState.hx:112:",this.curSel);
 	}
 	,update: function(elapsed) {
 		BlurryFlxSubState.prototype.update.call(this,elapsed);
@@ -25396,15 +25377,6 @@ var haxe_ds_StringMap = function() {
 $hxClasses["haxe.ds.StringMap"] = haxe_ds_StringMap;
 haxe_ds_StringMap.__name__ = "haxe.ds.StringMap";
 haxe_ds_StringMap.__interfaces__ = [haxe_IMap];
-haxe_ds_StringMap.stringify = function(h) {
-	var s = "{";
-	var first = true;
-	for (var key in h) {
-		if (first) first = false; else s += ',';
-		s += key + ' => ' + Std.string(h[key]);
-	}
-	return s + "}";
-};
 haxe_ds_StringMap.prototype = {
 	set: function(key,value) {
 		this.h[key] = value;
@@ -33775,7 +33747,7 @@ var lime_utils_AssetCache = function() {
 	this.audio = new haxe_ds_StringMap();
 	this.font = new haxe_ds_StringMap();
 	this.image = new haxe_ds_StringMap();
-	this.version = 709457;
+	this.version = 454850;
 };
 $hxClasses["lime.utils.AssetCache"] = lime_utils_AssetCache;
 lime_utils_AssetCache.__name__ = "lime.utils.AssetCache";
@@ -63488,7 +63460,7 @@ while(_g < _g1) {
 	var i = _g++;
 	lime_math_RGBA.__clamp[i] = 255;
 }
-lime_utils_Log.level = 3;
+lime_utils_Log.level = 0;
 if(typeof console == "undefined") {
 	console = {}
 }
